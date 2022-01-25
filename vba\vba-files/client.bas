@@ -18,10 +18,24 @@ Private Sub Worksheet_Change(ByVal target As Range)
     Application.EnableEvents = False
     Application.ScreenUpdating = False
     Application.Calculation = xlCalculationManual   'pre XL97 xlManua
-
+    
     If Not Application.Intersect(target, Range("M2")) Is Nothing Then
         Call CalendarUtil.DrawTitle
+        Call CalendarUtil.DrawToday
+        
+        Application.EnableEvents = True
+        Application.ScreenUpdating = True
+        Application.Calculation = xlCalculationAutomatic   'pre XL97 xlManua
+        Exit Sub
     End If
+    
+     If target.Row <= CalendarUtil.DateTitleRow Or target.Column > CalendarUtil.StartColumnIndex Then
+        Application.EnableEvents = True
+        Application.ScreenUpdating = True
+        Application.Calculation = xlCalculationAutomatic   'pre XL97 xlManua
+        Exit Sub
+    End If
+    
     Call TaskUtil.ScheduleTask(target)
     Call CalendarUtil.DrawPlan(TaskUtil.GetPlanStartRange(target), TaskUtil.GetPlanEndRange(target))
     Call CalendarUtil.DrawActual(TaskUtil.GetActualStartRange(target), TaskUtil.GetActualEndRange(target), TaskUtil.GetTaskDurationRange(target), TaskUtil.GetCompletionRange(target))
@@ -32,5 +46,7 @@ Private Sub Worksheet_Change(ByVal target As Range)
     Application.Calculation = xlCalculationAutomatic   'pre XL97 xlManua
     
 End Sub
+
+
 
 

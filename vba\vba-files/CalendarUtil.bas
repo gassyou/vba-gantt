@@ -9,13 +9,19 @@ Public DateTitleRow As Integer
 
 Public Property Let StartDateRange(val As Range)
     Set startDate = val
+    If Not IsDate(val) Or IsEmpty(val) Then
+        startDate = Date
+    ElseIf DateDiff("d", CDate("2000-01-01"), val) < 0 Then
+         startDate = Date
+    End If
+    
 End Property
 
 Public Property Get StartColumnIndex() As Integer
   If IsEmpty(startDate) Then
     StartColumnIndex = 0
   Else
-    StartColumnIndex = startDate.column
+    StartColumnIndex = startDate.Column
   End If
 End Property
 
@@ -28,6 +34,7 @@ Public Property Get EndColumnIndex() As Integer
 End Property
 
 Public Sub DrawTitle()
+
   Dim i As Integer
   For i = 0 To Duration
     'Set Calendar Day
@@ -52,6 +59,7 @@ Public Sub DrawTitle()
       .ColumnWidth = 3
       .NumberFormat = "d"
   End With
+  
 End Sub
 
 Public Sub DrawPlan(ByVal planStartDay As Range, ByVal planEndDay As Range)
@@ -82,6 +90,7 @@ Public Sub DrawPlan(ByVal planStartDay As Range, ByVal planEndDay As Range)
 End Sub
 
 Public Sub DrawActual(ByVal actualStartDay As Range, ByVal actualEndDay As Range, ByVal taskDuration As Range, ByVal completed As Range)
+  
   Dim actualBarName As String
   actualBarName = "actual" + CStr(actualStartDay.Row)
 
@@ -118,6 +127,7 @@ Dim endRange As Range
 End Sub
 
 Public Sub DrawToday()
+
   Dim calendarArea As Range
   Set calendarArea = Range(Cells(1, StartColumnIndex()), Columns(EndColumnIndex()))
 
@@ -227,4 +237,3 @@ Private Sub ClearRect(ByVal name As String)
     End If
   Next s
 End Sub
-

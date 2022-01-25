@@ -34,12 +34,12 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
     Set completionRange = GetCompletionRange(editTarget)
     
     If (Not IsDate(CalendarStartDate)) Then
-        MsgBox ("calendar start day is not correct date")
+        MsgBox ("calendar start day is not correct datse")
         Exit Sub
     End If
 
    Dim intervalDays As Integer
-    If editTarget.column = planStartColumn Then
+    If editTarget.Column = planStartColumn Then
         If (IsEmpty(planStartRange)) Then
             Exit Sub
         End If
@@ -70,7 +70,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
             Exit Sub
         End If
         
-    ElseIf editTarget.column = PlanEndColum Then
+    ElseIf editTarget.Column = PlanEndColum Then
         If (IsEmpty(planEndRange)) Then
             Exit Sub
         End If
@@ -99,7 +99,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
             taskDurationRange = intervalDays + 1
             Exit Sub
         End If
-    ElseIf editTarget.column = TaskDurationColumn Then
+    ElseIf editTarget.Column = TaskDurationColumn Then
         If (IsEmpty(taskDurationRange)) Then
             taskDurationRange = 1
         End If
@@ -112,7 +112,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
         End If
         planEndRange = DateAdd("d", taskDurationRange - 1, planStartRange)
         Exit Sub
-    ElseIf editTarget.column = ActualStartColumn Then
+    ElseIf editTarget.Column = ActualStartColumn Then
         If (IsEmpty(actualStartRange)) Then
             Exit Sub
         End If
@@ -121,7 +121,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
             Exit Sub
         End If
         Exit Sub
-    ElseIf editTarget.column = ActualEndColumn Then
+    ElseIf editTarget.Column = ActualEndColumn Then
         If (IsEmpty(actualEndRange)) Then
             Exit Sub
         End If
@@ -134,7 +134,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
         End If
         completionRange = 1
         Exit Sub
-    ElseIf editTarget.column = CompletionColumn Then
+    ElseIf editTarget.Column = CompletionColumn Then
         If (IsEmpty(completionRange)) Then
             Exit Sub
         End If
@@ -145,7 +145,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
             actualEndRange = planEndRange
         End If
         Exit Sub
-    ElseIf editTarget.column = LinkColumn Then
+    ElseIf editTarget.Column = LinkColumn Then
         ' TODOs
     Else
         If IsEmpty(planStartRange) And IsEmpty(planEndRange) Then
@@ -183,6 +183,7 @@ End Function
 Public Function GetCompletionRange(ByVal target As Range) As Range
     Set GetCompletionRange = Range(Cells(target.Row, CompletionColumn), Cells(target.Row, CompletionColumn))
 End Function
+
 
 
 
