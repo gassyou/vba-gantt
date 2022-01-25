@@ -200,7 +200,7 @@ Public Function ColumnIndexInCalendarOfDay(ByVal dayRange As Variant)
   End If
 
   If intervalDays < 0 Then
-    MsgBox ("The Date Need larger than calendar start day!" + dayRange.Address())
+    MsgBox ("The Date Need larger than calendar start day! " + dayRange.Address())
     intervalDays = 0
   End If
   ColumnIndexInCalendarOfDay = CLng(StartColumnIndex()) + intervalDays

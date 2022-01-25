@@ -34,7 +34,7 @@ Public Sub ScheduleTask(ByVal editTarget As Range)
     Set completionRange = GetCompletionRange(editTarget)
     
     If (Not IsDate(CalendarStartDate)) Then
-        MsgBox ("calendar start day is not correct datse")
+        MsgBox ("calendar start day is not correct date")
         Exit Sub
     End If
 
